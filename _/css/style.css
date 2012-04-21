@@ -161,6 +161,18 @@ h3 {
 	background: url('../img/docs_btn.png');
 }
 
+#guide-btn {
+	display: block;
+	position: relative;
+	top: -34px;
+	float: right;
+	width: 105px;
+	height: 34px;
+	text-indent: -9999px;
+	margin: 0;
+	background: url('../img/docs_btn.png');
+}
+
 .info {
 	color: #FFF;
 	display: block;
@@ -251,6 +263,15 @@ h3 {
 
 #release-table td.download-cell {
 	text-align: center;
+}
+
+#visual-tree {
+	text-align: center;
+	margin-top: 20px;
+}
+
+#getting-started {
+	margin-top: 50px;
 }
 
 footer {

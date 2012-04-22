@@ -70,8 +70,7 @@ html {
 body, select, input, textarea {color: #111;}
 
 body {
-	background: #000 url('../img/bg.jpg') no-repeat 50% 0;
-	background-size: cover;
+	background: #000 url('../img/background.png');
 	min-height: 100%;
 	overflow: hidden;
 }
@@ -159,6 +158,96 @@ h3 {
 	text-indent: -9999px;
 	margin: 0;
 	background: url('../img/docs_btn.png');
+}
+
+#header {
+	text-align: center;
+}
+
+#nav-home {
+	left: -55px;
+	width: 34px;
+	height: 34px;
+	position: absolute;
+	border-radius: 18px;
+	border: 2px solid rgba(0, 0, 0, 0.4);
+}
+
+#nav-home-highlight {
+	width: 35px;
+	height: 35px;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	position: absolute;
+	top: 0px;
+	left: -2px;
+	border-radius: 18px;
+	z-index: -1;
+}
+
+#nav-home img {
+	position: absolute;
+	top: 5px;
+	left: 9px;
+}
+
+#nav {
+	font-family: Verdana;
+	font-size: 17px;
+	height: 34px;
+	margin: auto;
+	line-height: 34px;
+	display: inline-block;
+	list-style-type: none;
+	text-shadow: 1px 1px 3px black;
+	border-radius: 18px;
+	position:relative;
+}
+
+#nav-highlight {
+	height: 103%;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	position: absolute;
+	width: 99.7%;
+	border-radius: 18px;
+	top: 2px;
+	z-index: -1;
+}
+
+#nav li {
+	float: left;
+	padding-left: 12px;
+	padding-right: 12px;
+	border: 2px solid rgba(0, 0, 0, 0.4);
+	border-left: 0;
+}
+
+#nav li a:hover {
+	text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+	color: #ccff00;
+}
+
+#nav li a {
+	color: #999999;
+	text-decoration: none;
+}
+
+#nav .selected a {
+	color: #ccff00;
+}
+
+#nav .selected {
+	box-shadow: 0px 0px 30px black inset;
+}
+
+#nav .left-item {
+	border-radius: 18px 0px 0px 18px;
+	padding-left: 15px;
+	border-left: 2px solid rgba(0, 0, 0, 0.4);
+}
+
+#nav .right-item {
+	border-radius: 0px 18px 18px 0px;
+	padding-right: 15px;
 }
 
 #guide-btn {

@@ -1,18 +1,18 @@
 <div id="header">
    <div id="logo">
-      <img src="_/img/logo.png" />
+      <img src="/_/img/logo.png" />
    </div>
 
    <ul id="nav">
       <div id="nav-home">
          <div id="nav-home-highlight">
-            <img src="_/img/home.png" />
+            <img src="/_/img/home.png" />
          </div>
       </div>
-      <li class="left-item selected"><a href="/docs">Docs</a></li>
-      <li><a href="/demos">Demos</a></li>
-      <li><a href="/about">About Us</a></li>
-      <li class="right-item"><a href="/contact">Contact</a></li>
+      <li class="left-item <% if(page == 'docs') { %>selected<% } %>"><a href="/docs">Docs</a></li>
+      <li class="<% if(page == 'demos') { %>selected<% } %>"><a href="/demos">Demos</a></li>
+      <li class="<% if(page == 'about') { %>selected<% } %>"><a href="/about">About Us</a></li>
+      <li class="right-item <% if(page == 'contact') { %>selected<% } %>"><a href="/contact">Contact</a></li>
       <div id="nav-highlight"></div>
    </ul>
 </div>

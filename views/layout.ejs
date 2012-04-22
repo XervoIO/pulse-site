@@ -11,12 +11,15 @@
   <meta name="keywords" content="pulse, game, engine, javascript, html5, canvas, play, programming">
 
   <meta name="Copyright" content="Paranoid Ferret Productions 2011. All Rights Reserved.">
-  <link rel="shortcut icon" href="_/img/favicon.ico">
-  <link rel="stylesheet" href="_/css/style.css">
+  <link rel="shortcut icon" href="/_/img/favicon.ico">
+  <link rel="stylesheet" href="/_/css/style.css">
 </head>
 
 <body>
 <%- partial('header') %>
+<% if(page == 'docs') { %>
+<%- partial('docs/filelist') %>
+<% } %>
 <%- body %>
 </body>
 </html>

@@ -16,10 +16,15 @@
 </head>
 
 <body>
-<%- partial('header') %>
-<% if(page == 'docs') { %>
-<%- partial('docs/filelist') %>
-<% } %>
-<%- body %>
+<div id="main">
+  <%- partial('header') %>
+  <div id="content">
+    <% if(page == 'docs') { %>
+    <%- partial('docs/filelist') %>
+    <% } %>
+    <%- body %>
+  </div>
+  <%- partial('footer') %>
+</div>
 </body>
 </html>

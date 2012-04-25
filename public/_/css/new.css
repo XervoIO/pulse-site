@@ -33,6 +33,17 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'OmnesRegular';
+    src: url('../fonts/omnes-webfont.eot');
+    src: url('../fonts/omnes-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/omnes-webfont.woff') format('woff'),
+         url('../fonts/omnes-webfont.ttf') format('truetype'),
+         url('../fonts/omnes-webfont.svg#OmnesRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
@@ -81,40 +92,124 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+input[type="text"] {
+    -webkit-appearance: none;
+}
+::-webkit-input-placeholder {
+   color: #494949;
+}
+input:-moz-placeholder {
+   color: #494949;
+}
+
 
 /* Site */
+h1, h2, h3 {
+  font-family: 'OmnesRegular', Geneva, Tahoma, Verdana, sans-serif;
+}
+
+h1 {
+  font-size: 40px;
+}
+
+h2 {
+  font-size: 35px;
+  margin-bottom: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: #CCFF00;
+}
+
 body {
   background: #000 url('../img/background.png');
+  font-family: Geneva, Tahoma, Verdana, sans-serif;
+  color: #CCC;
+  line-height: 20px;
+}
+
+#main {
+  width: 700px;
+  margin: 0 auto;
+  padding: 0 10px;
 }
 
 #header {
+  margin: 0 0 35px;
   text-align: center;
+}
+
+#logo {
+  margin: 15px 0 5px;
+}
+
+footer {
+  padding: 30px 0 0;
+  text-align: right;
+  font-size: 10px;
+  opacity: 0.5;
+  -moz-opacity: 0.5;
+  filter:alpha(opacity=5);
+}
+
+footer a:hover {
+  border-bottom: 1px dashed #CCFF00;
 }
 
 /* Generic Elements */
 .round-button {
-  width: 34px;
   height: 34px;
+  line-height: 34px;
   border-radius: 18px;
   border: 2px solid rgba(0, 0, 0, 0.4);
   position: relative;
 }
 
 .round-button .highlight {
-  width: 35px;
   height: 35px;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  position: absolute;
+  position: relative;
   top: 0px;
   left: -2px;
   border-radius: 18px;
   z-index: -1;
 }
 
+.round-button:active {
+  box-shadow: 0px 0px 30px black inset;
+}
+
+.link-button {
+  display: block;
+  height: 32px;
+  float: left;
+  text-shadow: 0px 0px 10px rgba(168, 426, 33, 0.8);
+  font-family: 'OmnesRegular', Geneva, Tahoma, Verdana, sans-serif;
+  line-height: 30px;
+  font-size: 18px;
+  background: transparent;
+}
+
+.link-button .highlight {
+  height: 33px;
+  padding: 0 15px;
+  margin-right: -3px;
+}
+
+.green {
+  color: #ccff00;
+}
+
 /* Nav */
 #nav-home {
+  width: 34px;
   left: -55px;
   position: absolute;
+}
+
+#nav-home .highlight {
+  width: 35px;
 }
 
 #nav-home img {
@@ -124,7 +219,7 @@ body {
 }
 
 #nav {
-  font-family: 'OmnesLight', Verdana, sans-serif;
+  font-family: 'OmnesRegular', Geneva, Tahoma, Verdana, sans-serif;
   font-size: 18px;
   height: 34px;
   margin: auto;
@@ -181,4 +276,95 @@ body {
 #nav .right-item {
   border-radius: 0px 18px 18px 0px;
   padding-right: 15px;
+}
+
+/* Home Features */
+#features {
+  margin: 0 0 25px;
+}
+
+#feature-select {
+  text-align: center;
+  height: 11px;
+  font-size: 0;
+  margin-top: 20px;
+}
+
+#feature-select div {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  text-indent: -9999px;
+  font-size: 0px;
+  background: #000;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+#feature-select div.selected {
+  background: #c0c0c0;
+}
+
+#feature-select div.last {
+  margin: 0;
+}
+
+/* Home Info */
+#info {
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+#download-area {
+  width: 349px;
+  float: left;
+  padding: 15px 0;
+  border-right: 2px solid #272525;
+  font-size: 14px;
+}
+
+#download-area .link-button {
+  margin-right: 15px;
+}
+
+#download-area p {
+  line-height: 36px;
+}
+
+#email-signup {
+  width: 314px;
+  float: left;
+  padding-left: 35px;
+}
+
+#email-signup p {
+  margin-bottom: 20px;
+}
+
+#email-signup input {
+  font-family: 'OmnesRegular', Geneva, Tahoma, Verdana, sans-serif;
+  float: left;
+  height: 36px;
+  width: 180px;
+  line-height: 36px;
+  margin-right: 10px;
+  background: transparent;
+  box-shadow: 0px 0px 30px black inset;
+  border-radius: 18px;
+  border: 0;
+  padding: 0 15px;
+  color: #CCC;
+  font-size: 16px;
+}
+
+#extra-buttons {
+  clear: both;
+}
+
+#github-link {
+  float: none;
+  width: 85px;
+  text-align: center;
+  margin: 0 auto;
 }

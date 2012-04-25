@@ -1,0 +1,184 @@
+/* Fonts */
+
+@font-face {
+  font-family: 'OmnesMedium';
+  src: url('../fonts/omnes_medium-webfont.eot');
+  src: url('../fonts/omnes_medium-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/omnes_medium-webfont.woff') format('woff'),
+       url('../fonts/omnes_medium-webfont.ttf') format('truetype'),
+       url('../fonts/omnes_medium-webfont.svg#OmnesMedium') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+    font-family: 'OmnesLight';
+    src: url('../fonts/omnes_light-webfont.eot');
+    src: url('../fonts/omnes_light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/omnes_light-webfont.woff') format('woff'),
+         url('../fonts/omnes_light-webfont.ttf') format('truetype'),
+         url('../fonts/omnes_light-webfont.svg#OmnesLight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'OmnesExtraLight';
+    src: url('../fonts/omnes_extralight-webfont.eot');
+    src: url('../fonts/omnes_extralight-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/omnes_extralight-webfont.woff') format('woff'),
+         url('../fonts/omnes_extralight-webfont.ttf') format('truetype'),
+         url('../fonts/omnes_extralight-webfont.svg#OmnesExtraLight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Site */
+body {
+  background: #000 url('../img/background.png');
+}
+
+#header {
+  text-align: center;
+}
+
+/* Generic Elements */
+.round-button {
+  width: 34px;
+  height: 34px;
+  border-radius: 18px;
+  border: 2px solid rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+.round-button .highlight {
+  width: 35px;
+  height: 35px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: absolute;
+  top: 0px;
+  left: -2px;
+  border-radius: 18px;
+  z-index: -1;
+}
+
+/* Nav */
+#nav-home {
+  left: -55px;
+  position: absolute;
+}
+
+#nav-home img {
+  position: absolute;
+  top: 5px;
+  left: 9px;
+}
+
+#nav {
+  font-family: 'OmnesLight', Verdana, sans-serif;
+  font-size: 18px;
+  height: 34px;
+  margin: auto;
+  line-height: 34px;
+  display: inline-block;
+  list-style-type: none;
+  text-shadow: 1px 1px 3px black;
+  border-radius: 18px;
+  position:relative;
+}
+
+#nav-highlight {
+  height: 35px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  position: absolute;
+  width: 99.7%;
+  border-radius: 18px;
+  top: 2px;
+  z-index: -1;
+}
+
+#nav li {
+  float: left;
+  padding-left: 12px;
+  padding-right: 12px;
+  border: 2px solid rgba(0, 0, 0, 0.4);
+  border-left: 0;
+}
+
+#nav li a:hover {
+  text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+  color: #ccff00;
+}
+
+#nav li a {
+  color: #999999;
+  text-decoration: none;
+}
+
+#nav .selected a {
+  color: #ccff00;
+}
+
+#nav .selected {
+  box-shadow: 0px 0px 30px black inset;
+}
+
+#nav .left-item {
+  border-radius: 18px 0px 0px 18px;
+  padding-left: 15px;
+  border-left: 2px solid rgba(0, 0, 0, 0.4);
+}
+
+#nav .right-item {
+  border-radius: 0px 18px 18px 0px;
+  padding-right: 15px;
+}

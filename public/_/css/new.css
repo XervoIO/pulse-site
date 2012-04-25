@@ -158,6 +158,10 @@ footer a:hover {
 }
 
 /* Generic Elements */
+.hidden {
+  display: none;
+}
+
 .round-button {
   height: 34px;
   line-height: 34px;
@@ -281,6 +285,51 @@ footer a:hover {
 /* Home Features */
 #features {
   margin: 0 0 25px;
+  position: relative;
+}
+
+#feature-holder {
+  position: relative;
+  width: 700px;
+  height: 285px;
+  overflow: hidden;
+}
+
+.feature {
+  position: absolute;
+  width: 700px;
+  height: 285px;
+  background: #CCC;
+  color: #333;
+  box-shadow: 0px 0px 10px black;
+}
+
+#feature-controls {
+  float: right;
+  margin-top: 20px;
+  width: 12px;
+  position: relative;
+}
+
+#feature-play,
+#feature-pause {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 12px;
+  height: 11px;
+  background: url('../img/play_pause.png') no-repeat;
+  font-size: 0;
+  text-indent: -9999px
+}
+
+#feature-play {
+  display: none;
+}
+
+#feature-pause {
+  background-position: -12px 0;
 }
 
 #feature-select {

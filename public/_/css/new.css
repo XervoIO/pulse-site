@@ -292,7 +292,6 @@ footer a:hover {
   position: relative;
   width: 700px;
   height: 285px;
-  overflow: hidden;
 }
 
 .feature {
@@ -307,6 +306,7 @@ footer a:hover {
 #feature-controls {
   float: right;
   margin-top: 20px;
+  margin-right: 297px;
   width: 12px;
   position: relative;
 }

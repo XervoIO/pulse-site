@@ -1,0 +1,23 @@
+<h1>Contact</h1>
+
+<% if(action == 'thanks') { %>
+<h2>Thanks for the contact.</h2>
+<p>We will get back to you as soon as we can. Start looking now.</p>
+<% } else { %>
+<p>We love to hear about any comments you have for us.<br/>We'd, also, love to hear how you're using Pulse.</p>
+<p>You're welcome to email us at:<br/><a href="mailto:support@withpulse.com">support@withpulse.com</a></p>
+<p>Or fill out the contact form below.</p>
+
+<form id="contact-form" action="/contact" method="post" enctype="application/x-www-form-urlencoded">
+  <label for="name-field">Name</label>
+  <input class="text-input required" type="text" id="name-field" name="name" placeholder="name" />
+  <label for="email-field">Email</label>
+  <input class="text-input required email" type="email" id="email-field" name="email" placeholder="email" />
+  <label for="message-field">Message</label>
+  <textarea id="message-field" class="required" name="message" placeholder="message"></textarea>
+  <input id="contact-submit" class="round-button link-button green" type="submit" value="Submit">
+</form>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<% } %>

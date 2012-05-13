@@ -1,0 +1,68 @@
+<h1>Release Notes</h1>
+<div id="release-notes">
+<h2><a name="1.1-r2">1.1 Release 2</a></h2>
+<h3>Bugs Squashed</h3>
+<ul>
+  <li>Some non-mouse events will no longer throw an error</li>
+</ul>
+<h2><a name="1.1-r1">1.1 Release 1</a></h2>
+<h3>Bugs Squashed</h3>
+<ul>
+  <li>Bitmap fonts now correctly take letter offset into account</li>
+  <li>Layer canvases will now currently default to the size of their parent</li>
+  <li>The update loop will now only run 20 updates when re-activating an inactive browser tab</li>
+  <li>You can now remove all visual-type objects from layers</li>
+  <li>Click events will no longer fire on hidden nodes</li>
+  <li>Nodes added to layers are not flagged for visual updating</li>
+  <li>Sound assets will no longer throw a loading error</li>
+  <li>pulse.Ready nows handles situations where the body is already loaded</li>
+</ul>
+<h3>New Features</h3>
+<ul>
+  <li>Engines can now be hidden, allowing you to pause all pulse-related logic</li>
+  <li>Added addScene, removeScene, activateScene, and deactivateScene to Engine</li>
+  <li>Layer.removeNode can take in a node object as well as the name of the node</li>
+  <li>Added support for touch events
+    <ul class="internal">
+      <li>touchstart, touchmove, and touchend are now bindable events</li>
+      <li>mousedown, mousedown, and mouseup events are mapped to their corresponding touch events if touch events are supported</li>
+      <li>click events are also mapped, so you can bind to click on touch devices</li>
+    </ul>
+  </li>
+  <li>Added pulse.support.touch that tells you if touch events are supported</li>
+</ul>
+<h2><a name="1.0-r1">1.0 Release 1</a></h2>
+<h3>API Changes</h3>
+<ul>
+  <li>Height and Width have been removed as params for engine and layer constructor.<br/>Anywhere you have created an engine or layer object you need to convert any width/height params passed into the constructor into a size object, just like you would do for a sprite.<br/><br/>
+Example<br/>
+<pre>var myLayer = new pulse.Layer({ width: 100, height: 100 });</pre>
+Becomes<br/>
+<pre>var myLayer = new pulse.Layer({ size: {width: 100, height: 100}});</pre>
+  </li>
+</ul>
+<h3>Bugs Squashed</h3>
+<ul>
+  <li>Layers added to scene after scene has been activated do not show up</li>
+  <li>AssetManager.percentLoaded was not correct in all cases</li>
+  <li>Removed inline iFrame support from engine because it doesn't work properly</li>
+  <li>Lots of smaller fixes</li>
+</ul>
+<h3>Improvements</h3>
+<ul>
+  <li>All size declarations on object params are consistent</li>
+</ul>
+<h3>New Features</h3>
+<ul>
+  <li>Added mouse over and mouse out events</li>
+  <li>Add generic text files asset type</li>
+  <li>If update time is too long we sub divide it to keep everything around 30fps</li>
+  <li>Game window now removes focus from other elements on page when it receives focus</li>
+  <li>Plugin system has been added</li>
+  <li>Added support for negative rotation values</li>
+  <li>Added event to AssetManager for progressChanged</li>
+  <li>Added parent property to node and set it when it's added as a child</li>
+  <li>Added shadow effect properties to visual</li>
+  <li>Added move action for moving sprites over a period of time</li>
+</ul>
+</div>

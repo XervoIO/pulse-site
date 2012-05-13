@@ -1,0 +1,141 @@
+<h1>Getting Started</h1>
+<div id="getting-started" class="center">
+  <h2>Hello World</h2>
+  <a href="/demos/hello-world" title="Hello World Demo Page">Demo Page</a>
+<pre>
+<code data-language="javascript">
+    // Hook the ready callback.
+    pulse.ready(function() {
+      // Create an engine.
+      var engine = new pulse.Engine({
+        gameWindow: 'helloWindow'
+      });
+
+      // Create a scene.
+      var scene = new pulse.Scene();
+
+      // Create a layer and add it to the scene.
+      var layer = new pulse.Layer();
+      layer.position = { x: 300, y : 200 };
+      scene.addLayer(layer);
+
+      // Create a label and add it to the layer.
+      var label = new pulse.CanvasLabel({ text: 'Hello World!' });
+      label.position = { x: 300, y: 200 };
+      layer.addNode(label);
+
+      // Add an activate the scene.
+      engine.scenes.addScene(scene);
+      engine.scenes.activateScene(scene);
+
+      // Start the update and render loop.
+      engine.go(30);
+    });
+</code>
+</pre>
+  <h2>Installing Pulse</h2>
+  <p>
+     Simply put either the minified version (pulse.min.js) or the full version (pulse.debug.js) somewhere that can be referenced from the HTML file.
+  </p>
+<pre>
+<code data-language="html">
+   &lt;html&gt;
+      &lt;head&gt;
+         &lt;script type="text/javascript" src="pulse.debug.js"&gt;&lt;/script&gt;
+      &lt;/head&gt;
+   &lt;/html&gt;
+</code>
+</pre>
+
+  <h2>pulse Namespace</h2>
+  <p>
+     Every object within Pulse resides in the "pulse" namespace (pulse.Sprite, pulse.Layer, etc). You can look at each class in the <a href="/docs/api" title="API Index">API documentation</a>.
+  </p>
+  <h2>Ready Callback</h2>
+  <p>
+     Pulse will raise a ready callback when the DOM and Pulse are both ready for use. The game's javascript file should use this callback as the starting point for implementation.
+  </p>
+<pre>
+<code data-language="javascript">
+   pulse.ready(function() {
+      // TODO: start building a game
+   });
+</code>
+</pre>
+  <h2>The Engine</h2>
+  <p>
+     The Pulse Engine object is the root class for a given game. Each Engine object is responsible for maintaining the visual state of a single game window. Websites can run multiple games simultaneously - each one will have a separate Engine object. The constructor for the Engine object requires a DOM object (or id) that will be used as the hosting element for the game. These are typically DIV elements, but can be other types if needed.
+  </p>
+<pre>
+<code data-language="javascript">
+   pulse.ready(function() {
+      var engine = new pulse.Engine( { gameWindow: "myDivElementId" } );
+   });
+</code>
+</pre>
+  <h2>Pulse Visual Hierarchy</h2>
+  <p>
+     Visual elements (nodes) in Pulse are organized into Layers, Scenes, and an Engine. Each game can have only one Engine. Each Engine can include multiple Scenes, however only one scene can be active at any given time. Each scene can contain multiple layers and each layer can include multiple nodes (sprites, text, etc).
+  </p>
+  <div id="visual-tree">
+     <img src="/img/visual_tree.png" />
+  </div>
+  <h2>Starting the Engine</h2>
+  <p>After the game has been configured and is ready to begin, call go on the Engine class.</p>
+<pre>
+<code data-language="javascript">
+   pulse.ready(function() {
+      // The game is all setup here.
+      ...
+      engine.go(33);
+   });
+</code>
+</pre>
+  <p>
+     The go function also accepts an optional callback that will be invoked on each update loop. This callback can be used to control game logic, animations, etc. For sufficiently advanced games, however, it is recommended to extend the base Pulse classes.
+  </p>
+  <h2>Extending Pulse Classes</h2>
+  <p>
+     All Pulse classes are implemented using a classical approach to inheritance, which makes extending them very easy.
+  </p>
+<pre>
+<code data-language="javascript">
+   var MyCustomSprite = pulse.Sprite.extend({
+      // The update function is the most likely function to override.
+      update: function(elapsed) {
+      // Custom update logic - change the position, etc.
+
+      // Remember to always call the base version.
+      this._super(elapsed);
+      }
+   });
+</code>
+</pre>
+  <h2>The Render Loop</h2>
+  <p>
+     Each update cycle is split into two parts - update and render. The update loop is used to set the visual state of the object before it is rendered to the screen. This is where an object’s new position, color, texture, etc should be assigned. The render loop will then draw the object's visual state to the screen. Pulse includes optimizations to ensure objects are not redrawn if their visual states have not been altered.
+  </p>
+  <h2>Events</h2>
+  <p>
+     Pulse supports many types of mouse and keyboard events. Each object has an instance of EventManager ([object].events) that can be used to bind events. Refer to the documentation and example application for complete usage details.
+  </p>
+<pre>
+<code data-language="javascript">
+   scene.events.bind('keydown', function(e) {
+      if(e.keyCode == 37) {
+         arrowLeft = true;
+      }
+      if(e.keyCode == 39) {
+         arrowRight = true;
+      }
+      if(e.keyCode == 38) {
+         arrowUp = true;
+      }
+      if(e.keyCode == 40) {
+         arrowDown = true;
+      }
+   });
+</code>
+</pre>
+</div>
+<script src="/js/rainbow-custom.min.js"></script>

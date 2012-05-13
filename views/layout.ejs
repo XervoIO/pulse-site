@@ -4,23 +4,34 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
+  <% if(typeof title != 'undefined') { %>
+  <title><%= title %></title>
+  <meta name="title" content="<%= title %>">
+  <% } else { %>
   <title>Pulse Canvas Graphics Engine</title>
+  <meta name="title" content="Pulse Gaming &amp; Graphics Engine">
+  <% } %>
 
-  <meta name="title" content="Pulse Canvas Graphics Engine">
+  <% if(typeof description != 'undefined') { %>
+  <meta name="description" content="<%= description %>">
+  <% } else { %>
   <meta name="description" content="Pulse is a Javascript and HTML 5 Canvas game engine that create anything from small breakout games to full platformers.">
+  <% } %>
+
   <meta name="keywords" content="pulse, game, engine, javascript, html5, canvas, play, programming">
 
   <meta name="Copyright" content="Paranoid Ferret Productions 2011. All Rights Reserved.">
-  <link rel="shortcut icon" href="/_/img/favicon.ico">
-  <link rel="stylesheet" href="/_/css/new.css">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/twilight.css">
 </head>
 
 <body>
 <div id="main">
   <%- partial('header') %>
   <div id="content">
-    <% if(page == 'docs') { %>
-    <%- partial('docs/filelist') %>
+    <% if(page == 'api') { %>
+    <%- partial('docs/api/filelist') %>
     <% } %>
     <%- body %>
   </div>

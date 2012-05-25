@@ -446,6 +446,34 @@ footer li.last {
 
 #download-area .link-button {
   margin-right: 15px;
+  text-shadow: 0px 0px 10px rgba(30, 30, 30, 0.8);
+}
+
+#download-area .green {
+  background: #CF0;
+  color: #222;
+}
+
+#download-area .black {
+  color: #CF0;
+}
+
+#download-area .black.link-button {
+  text-shadow: 0px 0px 10px rgba(168, 426, 33, 0.8);
+}
+
+#download-area .red {
+  background: #D83212;
+  color: #222;
+}
+
+#download-area .blue {
+  background: #028EF0;
+  color: #222;
+}
+
+#download-area .highlight {
+  z-index: 1;
 }
 
 #download-area p {

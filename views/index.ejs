@@ -18,7 +18,7 @@
 <section id="info">
   <div id="download-area">
     <h2>Download Pulse Now</h2>
-    <a href="/downloads/releases/pulse.latest.zip" class="round-button link-button green" onclick="javascript: _gaq.push(['_trackPageview', '/downloads/latest']);"><div class="highlight">Download</div></a><p>v1.1-r2 (409kb)</p>
+    <a href="/downloads/releases/pulse.latest.zip" class="round-button link-button <%= buttonTest.option %>" onclick="javascript: _gaq.push(['_trackPageview', '/downloads/latest#home']);"><div class="highlight">Download</div></a><p>v1.1-r2 (409kb)</p>
   </div>
   <div id="email-signup">
     <p>Sign up below to stay up-to-date with important news and updates.</p>
@@ -52,3 +52,4 @@
 </section>
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="/js/main.js"></script>
+<%- buttonTest.gacode %>

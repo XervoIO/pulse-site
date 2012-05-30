@@ -32,7 +32,7 @@
 				<td class="attributes">&nbsp;</td>
 				<td class="nameDescription" >
 					<div class="fixedFont">
-						<b><a href="../symbols/pulse.Texture#constructor">pulse.Texture</a></b>(filename)
+						<b><a href="../symbols/pulse.Texture#constructor">pulse.Texture</a></b>(params)
 					</div>
 					<div class="description">Raw 2d image, represented as a canvas object.</div>
 				</td>
@@ -170,7 +170,7 @@ completely opaque.</div>
 		</div>
 
 		<div class="fixedFont">
-				<b>pulse.Texture</b>(filename)
+				<b>pulse.Texture</b>(params)
 		</div>
 
 		<div class="description">
@@ -185,7 +185,14 @@ completely opaque.</div>
 				<dt class="heading">Parameters:</dt>
 				
 					<dt>
-						<span class="light fixedFont">{string}</span>  <b>filename</b>
+						<span class="light fixedFont">{object}</span>  <b>params</b>
+						
+					</dt>
+						<dd>parameters that can be set as initialized options
+on the texture.</dd>
+				
+					<dt>
+						<span class="light fixedFont">{string}</span>  <b>params.filename</b>
 						
 					</dt>
 						<dd>the path to the raw image.</dd>

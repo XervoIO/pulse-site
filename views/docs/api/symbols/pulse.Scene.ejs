@@ -8,7 +8,7 @@
 <!-- ============================== class summary ========================== -->
 	<p class="description">
 		
-		<br />Extends
+		Extends
 			<a href="../symbols/pulse.Node">pulse.Node</a>.<br />
 		
 
@@ -137,6 +137,15 @@ things visual in the engine.</div>
 				<tr>
 					<td class="attributes">&nbsp;</td>
 					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.Scene#draw">draw</a></b>()
+						</div>
+						<div class="description">Draws any layers that are live and have been updated.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
 						<div class="fixedFont"><b><a href="../symbols/pulse.Scene#eventsCallback">eventsCallback</a></b>(type, evt)
 						</div>
 						<div class="description">Handles all events sent to this scene.</div>
@@ -182,6 +191,15 @@ things visual in the engine.</div>
 				<tr>
 					<td class="attributes">&nbsp;</td>
 					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.Scene#on">on</a></b>(type, callback)
+						</div>
+						<div class="description">Convenience function that will bind a callback to an event type.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
 						<div class="fixedFont"><b><a href="../symbols/pulse.Scene#removeLayer">removeLayer</a></b>(name)
 						</div>
 						<div class="description">Removes a layer from this scene by name.</div>
@@ -202,7 +220,7 @@ things visual in the engine.</div>
 					<td class="nameDescription">
 						<div class="fixedFont"><b><a href="../symbols/pulse.Scene#update">update</a></b>(elapsed)
 						</div>
-						<div class="description">Updates the layers and then draws them.</div>
+						<div class="description">Updates the layers.</div>
 					</td>
 				</tr>
 			
@@ -533,6 +551,29 @@ on the node</dd>
 
 			<hr />
 		
+			<a name="draw"> </a>
+			<div class="fixedFont">
+
+			
+			<b>draw</b>()
+
+			</div>
+			<div class="description">
+				Draws any layers that are live and have been updated.
+			</div>
+
+			
+
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
 			<a name="eventsCallback"> </a>
 			<div class="fixedFont">
 
@@ -707,6 +748,46 @@ to that layer.
 
 			<hr />
 		
+			<a name="on"> </a>
+			<div class="fixedFont">
+
+			
+			<b>on</b>(type, callback)
+
+			</div>
+			<div class="description">
+				Convenience function that will bind a callback to an event type.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{string}</span> <b>type</b>
+							
+						</dt>
+						<dd>the event type to bind</dd>
+					
+						<dt>
+							<span class="light fixedFont">{function}</span> <b>callback</b>
+							
+						</dt>
+						<dd>the function callback to bind to the event</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
 			<a name="removeLayer"> </a>
 			<div class="fixedFont">
 
@@ -790,7 +871,7 @@ default layers sizes too.
 
 			</div>
 			<div class="description">
-				Updates the layers and then draws them.
+				Updates the layers.
 			</div>
 
 			

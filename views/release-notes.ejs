@@ -1,5 +1,35 @@
 <h1>Release Notes</h1>
 <div id="release-notes">
+<h2><a name="1.2-r1">1.2 Release 1</a></h2>
+<h3>Bugs Squashed</h3>
+<ul>
+  <li>You can now remove plugins from an engine</li>
+  <li>You can now remove assets from asset manager</li>
+  <li>URLs for Bitmap Fonts can now have query strings</li>
+  <li>Layers can now be hidden/shown via the visible property</li>
+  <li>The parent property on layers is now set when adding it to a scene</li>
+  <li>Engine constructor documentation was corrected to show size as a single object with width/height properties, instead of two separate parameters</li>
+  <li>Texture constructor documentation was corrected to show that a params object is passed and not a string</li>
+</ul>
+<h3>Improvements</h3>
+<ul>
+  <li>Optimized the move method on visual objects</li>
+</ul>
+<h3>New Features</h3>
+<ul>
+  <li>Events can now be bound using obj.on().<br/><br/>Example:<br/>
+<pre>mySprite.on(‘click’, function(){});</pre>
+  </li>
+  <li>You can now debug your code more efficiently using the Pulse Debug Panel<br/><br/><h4>Some key features include:</h4>
+      <ul>
+        <li>The ability to monitor performance statistics such as the FPS or draw times</li>
+        <li>A simple to use, cross-browser compatible, console</li>
+        <li>Inspect the properties of any node in your game without writing any console calls</li>
+        <li>Visual debugging capabilities so you can see where and what your objects are doing, without needed to add extra drawing code</li>
+        <li>All you have to do is include one file and the panel is ready to use</li>
+      </ul>
+  </li>
+</ul>
 <h2><a name="1.1-r2">1.1 Release 2</a></h2>
 <h3>Bugs Squashed</h3>
 <ul>

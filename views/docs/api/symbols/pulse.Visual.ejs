@@ -8,7 +8,7 @@
 <!-- ============================== class summary ========================== -->
 	<p class="description">
 		
-		<br />Extends
+		Extends
 			<a href="../symbols/pulse.Node">pulse.Node</a>.<br />
 		
 
@@ -156,6 +156,17 @@ updated in the update function.</div>
 						<b><a href="../symbols/pulse.Visual#canvas">canvas</a></b>
 						</div>
 						<div class="description">The html canvas element that represents this visual node.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont">
+						<b><a href="../symbols/pulse.Visual#events">events</a></b>
+						</div>
+						<div class="description">Event manager for this visual, handles passing events down to it's
+children.</div>
 					</td>
 				</tr>
 			
@@ -473,6 +484,15 @@ visual node and anchor position.</div>
 				<tr>
 					<td class="attributes">&nbsp;</td>
 					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.Visual#eventsCallback">eventsCallback</a></b>(type, evt)
+						</div>
+						<div class="description">Handles all events sent to this visual object.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
 						<div class="fixedFont"><b><a href="../symbols/pulse.Visual#getAction">getAction</a></b>(name)
 						</div>
 						<div class="description">Returns an animation from the collection by name.</div>
@@ -486,6 +506,15 @@ visual node and anchor position.</div>
 						</div>
 						<div class="description">Moves the visual node by adding passed in parameters to the
 current position.</div>
+					</td>
+				</tr>
+			
+				<tr>
+					<td class="attributes">&nbsp;</td>
+					<td class="nameDescription">
+						<div class="fixedFont"><b><a href="../symbols/pulse.Visual#on">on</a></b>(type, callback)
+						</div>
+						<div class="description">Convenience function that will bind a callback to an event type.</div>
 					</td>
 				</tr>
 			
@@ -765,6 +794,27 @@ updated in the update function.
 			</div>
 			<div class="description">
 				The html canvas element that represents this visual node.
+			</div>
+
+			
+
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="events"> </a>
+			<div class="fixedFont">
+
+			
+			<b>events</b>
+
+			</div>
+			<div class="description">
+				Event manager for this visual, handles passing events down to it's
+children.
 			</div>
 
 			
@@ -1393,6 +1443,47 @@ visual on</dd>
 
 			<hr />
 		
+			<a name="eventsCallback"> </a>
+			<div class="fixedFont">
+
+			
+			<b>eventsCallback</b>(type, evt)
+
+			</div>
+			<div class="description">
+				Handles all events sent to this visual object. This base callback is
+meant to be overridden and does nothing by default.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{string}</span> <b>type</b>
+							
+						</dt>
+						<dd>the type of event raised</dd>
+					
+						<dt>
+							<span class="light fixedFont">{object}</span> <b>evt</b>
+							
+						</dt>
+						<dd>the event object with properties on the event</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
 			<a name="getAction"> </a>
 			<div class="fixedFont">
 
@@ -1463,6 +1554,46 @@ current position.
 							
 						</dt>
 						<dd>the value to add to the y position.</dd>
+					
+					</dl>
+				
+				
+				
+				
+				
+				
+				
+
+			<hr />
+		
+			<a name="on"> </a>
+			<div class="fixedFont">
+
+			
+			<b>on</b>(type, callback)
+
+			</div>
+			<div class="description">
+				Convenience function that will bind a callback to an event type.
+			</div>
+
+			
+
+				
+					<dl class="detailList">
+					<dt class="heading">Parameters:</dt>
+					
+						<dt>
+							<span class="light fixedFont">{string}</span> <b>type</b>
+							
+						</dt>
+						<dd>the event type to bind</dd>
+					
+						<dt>
+							<span class="light fixedFont">{function}</span> <b>callback</b>
+							
+						</dt>
+						<dd>the function callback to bind to the event</dd>
 					
 					</dl>
 				

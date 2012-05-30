@@ -71,7 +71,7 @@ input:-moz-placeholder {
 
 
 /* Site */
-h1, h2, h3 {
+h1, h2, h3, h4 {
   font-family: 'OmnesRegular', Geneva, Tahoma, Verdana, sans-serif;
 }
 
@@ -90,6 +90,11 @@ h2 {
 h3 {
   font-size: 20px;
   line-height: 20px;
+  margin-bottom: 10px;
+}
+
+h4 {
+  font-size: 18px;
   margin-bottom: 10px;
 }
 
@@ -748,6 +753,7 @@ footer li.last {
 /* Demos */
 .demo {
   padding: 20px 50px;
+  overflow: hidden;
 }
 
 #content .demo p {

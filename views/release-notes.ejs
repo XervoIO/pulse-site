@@ -1,10 +1,19 @@
 <h1>Release Notes</h1>
 <div id="release-notes">
 <h2><a name="1.2-r1">1.2 Release 1</a></h2>
+<h3>Filename Changes</h3>
+<ul>
+  <li>pulse.debug.js has been changed to pulse.js</li>
+  <li>pulse.debug.js now refers to the full version of the new Debug Panel feature</li>
+  <li>Pulse distributions will now be in this form:<br/></br>
+    <ul>
+      <li>[name].js - full version used for debugging</li>
+      <li>[name].min.js - minified version used for released products</li>
+    </ul>
+  </li>
+</ul>
 <h3>Bugs Squashed</h3>
 <ul>
-  <li>You can now remove plugins from an engine</li>
-  <li>You can now remove assets from asset manager</li>
   <li>URLs for Bitmap Fonts can now have query strings</li>
   <li>Layers can now be hidden/shown via the visible property</li>
   <li>The parent property on layers is now set when adding it to a scene</li>
@@ -17,8 +26,10 @@
 </ul>
 <h3>New Features</h3>
 <ul>
+  <li>You can now remove plugins from an engine</li>
+  <li>You can now remove assets from asset manager</li>
   <li>Events can now be bound using obj.on().<br/><br/>Example:<br/>
-<pre>mySprite.on(‘click’, function(){});</pre>
+<pre>mySprite.on(‘click’, function(event){});</pre>
   </li>
   <li>You can now debug your code more efficiently using the Pulse Debug Panel<br/><br/><h4>Some key features include:</h4>
       <ul>

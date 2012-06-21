@@ -1,0 +1,16 @@
+<div class="breadcrumbs">
+<ul>
+<% for(var i = 0; i < breadcrumbs.length; i++) { %>
+  <li>
+  <% if(i != 0) { %>
+  /
+  <% } %>
+  <% if(breadcrumbs[i].link) { %>
+    <a href="<%= breadcrumbs[i].link %>"><%= breadcrumbs[i].name %></a>
+  <% } else { %>
+    <%= breadcrumbs[i].name %>
+  <% } %>
+  </li>
+<% } %>
+</ul>
+</div>

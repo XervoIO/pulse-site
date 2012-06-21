@@ -549,6 +549,19 @@ footer li.last {
   float: none;
 }
 
+/* Breadcrumbs */
+.breadcrumbs {
+  border-top: 2px solid #272525;
+  border-bottom: 2px solid #272525;
+  margin: -10px 0 15px;
+  padding: 5px;
+  font-size: 11px;
+}
+
+.breadcrumbs li {
+  display: inline;
+}
+
 /* Content */
 #content {
   font-size: 14px;

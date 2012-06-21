@@ -1,0 +1,60 @@
+<h1>Using the Debug Panel</h1>
+
+<h2>Installing</h2>
+
+<p>To install and activate the Pulse Debug Panel, simply include the full or minified JavaScript file into your page.</p>
+
+<pre>
+<code data-language="html">
+  &lt;script type="text/javascript" src="pulse.debug.min.js"&gt;&lt;/script&gt;
+</code>
+</pre>
+
+<h2>The Basics</h2>
+
+<p>By default, the panel has three tabs available. We are going to go over what each one offers and how to use them effectively. However, first let's dive into some basic things that you will need to know, presented here in a quick list of tips.</p>
+
+<ul>
+  <li>Clicking and dragging the header will resize the debug panel.</li>
+  <li>The bottom of the panel is a status bar that provides constant statistics, such as FPS.</li>
+  <li>On the far right of the tab bar is a button to toggle visual debugging. In visual debug mode, all nodes will have an outline and a mark for their current anchor point.</li>
+  <li>All pieces of the debug panel use our inheritance system, so you can extend or add to it as you see fit.</li>
+</ul>
+
+<p>Here is an image pointing out the important parts.</p>
+
+<img src="/img/debug/Labeled.jpg" alt="Debug Panel Diagram"/>
+
+<h2>Performance</h2>
+
+<p>When the debug panel first loads up the performance tab will be selected. The main point of this tab is to provide visual feedback on how well your game is running. Its main feature is a scrolling graph that has three series. It show the update times for the update cycle, the draw cycle, and the browser's refresh rate. At the bottom of the panel, right above the status bar, you will find a legend showing what color each series is. This tab is otherwise passive and requires no user interaction. The Diagram above shows the performance tab in all its glory.</p>
+
+<img src="/img/debug/perform.jpg" alt="Debug Panel Diagram"/>
+
+<h2>The Inspector</h2>
+
+<p>The inspector is exactly what it sounds like. It allows you to inspect the various pieces of your game, one node at a time. It is similar to other inspectors you might have used, with the object tree on the left side and the properties section on the right. All you have to do is click on a node and its properties will show up to the right. The properties are then updated in real time as the node is modified.</p>
+
+<img src="/img/debug/inspect.jpg" alt="Debug Panel Inspection Tab"/>
+
+<p>In the properties section, you will also find two actions (only one for scenes) you can make against the selected node. You can either show/hide the node or enable visual debugging (outline) for it. Each option can be toggled at will, although it may not be very useful to enable visual debugging on a hidden node.</p>
+
+<h2>The Console</h2>
+
+<p>The console is a cross-browser alternative to the browser's console. The only difference is the pulse debug console only offers logging, while a browsers console will allow you to do simple scripting as well. However, with each browser implementing a slightly different console, logging information with Pulse's console is hassle free. You can also filter the messages by type, if you really have that many errors you need to filter out.</p>
+
+<h3>Usage</h3>
+
+<pre>
+<code data-language="javascript">
+  pulse.info('My informative message.');
+
+  pulse.warn('Something probably shouldn’t have done that.');
+
+  pulse.error('Critical error.  Something bad happened.');
+</code>
+</pre>
+
+<img src="/img/debug/console.jpg" alt="Debug Panel Console Tab"/>
+
+<script src="/js/rainbow-custom.min.js"></script>

@@ -44,6 +44,9 @@
 <body>
 <div id="main">
   <%- partial('header') %>
+  <% if(typeof breadcrumbs != 'undefined') { %>
+    <%- partial('breadcrumbs') %>
+  <% } %>
   <div id="content">
     <% if(page == 'api') { %>
     <%- partial('docs/api/filelist') %>

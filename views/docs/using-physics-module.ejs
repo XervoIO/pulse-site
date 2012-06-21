@@ -1,0 +1,154 @@
+<h1>Using the Physics Module</h1>
+<p>
+  The Pulse Physics Module provides a wrapper around <a href="http://code.google.com/p/box2dweb" title="Box2d for the Web">box2dweb</a> and is designed to easily provide basic collision detection while maintaining support for much more complex scenarios.  box2dweb is a JavaScript implementation of <a href="http://box2d.org" title="Box2d">Box2D</a>.
+</p>
+<h2>Installation</h2>
+<p>
+  Include the full or minified version of the physics module JavaScript file into your application.
+</p>
+<pre>
+<code data-language="html">
+  &lt;html&gt;
+      &lt;head&gt;
+         &lt;script type="text/javascript" src="pulse.physics.min.js"&gt;&lt;/script&gt;
+      &lt;/head&gt;
+   &lt;/html&gt;
+</code>
+</pre>
+<h2>Basic Usage</h2>
+<p>
+   When the physics module is included, all nodes that extend pulse.Visual, except Layer, will be added to the physics world by default.  The physics properties are defined by passing a new object through the visual’s constructor parameters.
+</p>
+<pre>
+<code data-language="javascript">
+  new pulse.Sprite({
+    src: 'myTexture.png',
+    size: { width: 100, height: 100 },
+    physics: {
+      basicShape: 'box',
+      isStatic: false,
+      isEnabled: true
+    }
+  });
+</code>
+</pre>
+<p>
+  The example above demonstrates the default parameters that will be applied to every new visual.  The size parameter is required to properly setup the dimensions of a basic collision object.
+</p>
+<p>
+  <b>basicShape</b> can either be ‘circle’ or ‘box.  This parameter provides a simple way to create the most common two collision shapes.  Defaults to 'box'.
+</p>
+<p>
+  <b>isStatic</b> determines whether or not the object will move and be affected by gravity.  Static objects are good for walls and grounds.  Defaults to false.
+</p>
+<p>
+  <b>isEnabled</b> provides the ability to disable physics for a specific visual.  Defaults to true.
+</p>
+<h3>Positioning</h3>
+<p>
+  A visual’s position must be set before being added to the display.  This is because the physics engine should be responsible for controlling an object’s position and if the position is not set before it’s added to the world, it will assume a starting position of (0,0).  Typically this means setting the starting position before adding the visual to a layer.
+</p>
+<pre>
+<code data-language="javascript">
+  var sprite = new pulse.Sprite( { … } );
+  // Set the position before adding it to the layer.
+  sprite.position = { x: startingX, y: startingY };
+  myLayer.addNode(sprite);
+</code>
+</pre>
+<p>
+  Setting the position property on a visual in the physics world will have no affect.  The positioning of a visual is entirely controlled by the physics engine.
+</p>
+<h3>Adding and Removing</h3>
+<p>
+  A visual’s body is automatically added to the world when it is added to a layer.  It is automatically removed from the world when it is removed from a layer.
+</p>
+<h2>The World</h2>
+<p>
+  By default everything is added to a single global world that can be accessed through the pulse.physics.world property.  This can introduce problems if the application has multiple layers at different positions.  Since a node’s position is relative to its parent layer, the physics engine can get confused when the parent layer moves relative to other layers.  If needed, every visual can be added to a custom world by supplying it through the constructor.  Applications can have multiple worlds running simultaneously.  The default world is stepped automatically by the physics module.  Any custom worlds must be stepped manually.
+</p>
+<pre>
+<code data-language="javascript">
+  new pulse.Sprite({
+    …
+    physics: {
+      …
+      world: myCustomWorld
+    }
+  });
+</code>
+</pre>
+<h3>Gravity</h3>
+<p>
+  The world’s gravity is set to (0, 9.8), which approximates real life.  The world’s gravity can be changed by calling:
+</p>
+<pre>
+<code data-language="javascript">
+  pulse.physics.world.SetGravity(new Box2D.Common.Math.b2Vec2(x, y));
+</code>
+</pre>
+<h2>Advanced</h2>
+<p>
+  Most features supported by Box2D are still available.  In fact, all of Box2D is bundled with the module and can be used directly without using any of Pulse’s integration.
+</p>
+<h3>Custom Shapes</h3>
+<p>
+  The most common advanced feature will be providing custom collision shapes.  The physics constructor params provide the ability to completely override an object’s Fixture Definition, which includes the object’s shape.
+</p>
+<pre>
+<code data-language="javascript">
+  //Create a custom fixture to hold the custom shape.
+  var fixDef = new Box2D.Dynamics.b2FixtureDef();
+  fixDef.density = pulse.physics.density;
+  fixDef.friction = pulse.physics.friction;
+  fixDef.restitution = pulse.physics.restitution;
+  
+  // Define the shape as a polygon.
+  fixDef.shape = new Box2D.Collision.Shapes.b2PolygonShape();
+  
+  // Define the points in clockwise order relative to the center of the object.
+  var points = [
+    { x: -42, y: -14 },
+    { x: -19, y: -42 },
+    { x: 20, y: -40 },
+    { x: 33, y: -18 },
+    { x: 41, y: 32 },
+    { x: 10, y: 41 },
+    { x: -39, y: 13 }
+  ];
+  
+  // Convert the points to an array of b2Vec2 objects.
+  var vecs = [];
+  for(var i = 0; i < 7; i++) {
+    var point = new Box2D.Common.Math.b2Vec2();
+    // Multiply the positions by the physics factor.
+    // Pulse and Box2D use different units of measurement.  Box2D
+    // expects numbers much smaller than pixel dimensions.
+    point.Set(
+      points[i].x * pulse.physics.FACTOR,
+      points[i].y * pulse.physics.FACTOR);
+    vecs.push(point);
+  }
+  
+  // Assign the points to the shape.
+  fixDef.shape.SetAsArray(vecs, vecs.length);
+  
+  // Create the sprite.
+  var convex = new pulse.Sprite({ 
+    src: 'shape.png', 
+    size: { width: 84, height: 84 },
+    physics: {
+      fixDef : fixDef
+    }
+  });
+  convex.position = { x: pos.x, y: pos.y };
+</code>
+</pre>
+<h3>Box2D Members</h3>
+<p>When a visual is constructed, its Box2D members can be accessed through the _physics property.</p>
+<p>node._physics.world is the world that this node has been added to.</p>
+<p>node._physics.bodyDef is the node’s body definition.</p>
+<p>node._physics.fixtureDef is the node’s fixture definition.</p>
+<p>node._physics.body is the node’s body.</p>
+<p>node._physics.fixture is the node’s fixture.</p>
+<script src="/js/rainbow-custom.min.js"></script>

@@ -12,34 +12,27 @@ mm.Brick = pulse.Sprite.extend({
    */
   init: function(texture, layer) {
     this.layer = layer;
-    this._super( { src: texture });
-    this.anchor = { x: 0, y: 0 };
-    this.size = { width: mm.Brick.Size.width, height: mm.Brick.Size.height };
-  },
-  /**
-   * Creates the Box2D body for this brick
-   * @return {[type]}
-   */
-  createBody: function() {
-    this.body = mm.createBody(
-      { x: this.position.x,
-        y: this.position.y,
-        size: {
-          width: mm.Brick.Size.width,
-          height: mm.Brick.Size.height }
-        },
-        this.layer.world);
+    this._super({
+      src: texture,
+      physics: {
+        isEnabled: false
+      }
+    });
+    this.size = {
+      width: mm.Brick.Size.width,
+      height: mm.Brick.Size.height
+    };
   }
 });
 
 // Creating brick textures and setting them to static members
-mm.Brick.GroundTextureLeft = new pulse.Texture( { filename: '/demos/megaman/img/brick_ground_left.png'} );
-mm.Brick.GroundTextureRight = new pulse.Texture( { filename: '/demos/megaman/img/brick_ground_right.png'} );
-mm.Brick.PlatformTexture = new pulse.Texture( { filename: '/demos/megaman/img/brick_platform.png'} );
-mm.Brick.PlatformTextureLeft = new pulse.Texture( { filename: '/demos/megaman/img/brick_platform_left.png'} );
-mm.Brick.PlatformTextureRight = new pulse.Texture( { filename: '/demos/megaman/img/brick_platform_right.png'} );
-mm.Brick.GroundTexture = new pulse.Texture( { filename: '/demos/megaman/img/brick_ground.png'} );
-mm.Brick.GroundTopTexture = new pulse.Texture( { filename: '/demos/megaman/img/ground_top.png'} );
+mm.Brick.GroundTextureLeft = new pulse.Texture( { filename: 'img/brick_ground_left.png'} );
+mm.Brick.GroundTextureRight = new pulse.Texture( { filename: 'img/brick_ground_right.png'} );
+mm.Brick.PlatformTexture = new pulse.Texture( { filename: 'img/brick_platform.png'} );
+mm.Brick.PlatformTextureLeft = new pulse.Texture( { filename: 'img/brick_platform_left.png'} );
+mm.Brick.PlatformTextureRight = new pulse.Texture( { filename: 'img/brick_platform_right.png'} );
+mm.Brick.GroundTexture = new pulse.Texture( { filename: 'img/brick_ground.png'} );
+mm.Brick.GroundTopTexture = new pulse.Texture( { filename: 'img/ground_top.png'} );
 
 // Setting the size for bricks as a static member
 mm.Brick.Size = { width: 25, height: 25 };
@@ -55,11 +48,8 @@ mm.Level = pulse.Layer.extend({
    * @config {b2World} world Box2D world
    */
   init: function(params) {
-
-    this.world = params.world;
-
     this._super(params);
-
+    
     for(var idx in mm.Level.Layout) {
       // Platform
       if(mm.Level.Layout[idx].p) {
@@ -82,6 +72,10 @@ mm.Level = pulse.Layer.extend({
  * @param {pulse.Layer} layer The layer to add the platform to
  */
 mm.Platform = function(params, layer) {
+
+  var startPos;
+  var endPos;
+
   // loop through the width of the platform
   for(var i = 0; i < params.size.width; i++) {
 
@@ -93,27 +87,45 @@ mm.Platform = function(params, layer) {
     else if (i == params.size.width - 1) {
       texture = mm.Brick.PlatformTextureRight;
     }
-
+    
     // create a brick and set its position
     var brick = new mm.Brick(texture, layer);
-    brick.position.x = (mm.Brick.Size.width - 1) * params.x + i * (mm.Brick.Size.width - 1);
-    brick.position.y = layer.size.height - (mm.Brick.Size.height * params.y) - mm.Brick.Size.height;
+
+    brick.position.x =
+      (mm.Brick.Size.width - 1) * params.x + i *
+      (mm.Brick.Size.width - 1);
+
+    brick.position.y = layer.size.height -
+      ((mm.Brick.Size.height) * params.y) -
+      (mm.Brick.Size.height / 2);
+
+    if(i === 0)
+      startPos = brick.position;
+
+    endPos = brick.position;
 
     // add the brick to the layer
     layer.addNode(brick);
   }
 
-  /**
-   * Calculate the width, height, x, and y position of the Box2D body that
-   * needs to be created
-   */
-  var width = (mm.Brick.Size.width - 1) * params.size.width;
-  var height = (mm.Brick.Size.height - 1);
-  var xPos = (mm.Brick.Size.width - 1) * params.x + width / 2;
-  var yPos = layer.size.height - (mm.Brick.Size.height * params.y) - mm.Brick.Size.height + height / 2;
+  // Create a dummy sprite for physics.
+  var physicsSprite = new pulse.Sprite({
+    src: 'img/blank.png',
+    physics: {
+      isStatic: true
+    },
+    size: { 
+      width: (endPos.x - startPos.x) + mm.Brick.Size.width,
+      height: mm.Brick.Size.height
+    }
+  });
 
-  // Create a single body to represent the platform
-  mm.createBody({ x: xPos, y: yPos, size: {width: width, height: height}}, layer.world);
+  physicsSprite.position = {
+    x: (startPos.x) + ((endPos.x - startPos.x) / 2),
+    y: startPos.y
+  };
+
+  layer.addNode(physicsSprite);
 };
 
 /**
@@ -147,54 +159,40 @@ mm.Chunk = function(params, layer) {
 
       // Create new brick and set its position
       var brick = new mm.Brick(texture, layer);
+      brick._physics.fixDef.restitution = 0;
+      
       brick.position.y =
         layer.size.height -
-        colIdx * (mm.Brick.Size.height - 1) -
-        mm.Brick.Size.height;
-      brick.position.x = (mm.Brick.Size.width - 1) * (params.x + rowIdx);
+        colIdx * mm.Brick.Size.height + colIdx;
+
+      brick.position.x =
+        (mm.Brick.Size.width - 1) *
+        (params.x + rowIdx);
+
 
       // Add the brick to the layer
       layer.addNode(brick);
     }
   }
 
-  /**
-   * Calculate the width, height, x, and y position of the Box2D body that
-   * needs to be created
-   */
-  var width = (mm.Brick.Size.width - 1) * params.size.width;
-  var height = (mm.Brick.Size.height - 1) * params.size.height;
-  var xPos = (mm.Brick.Size.width - 1) * params.x + width / 2;
-  var yPos = layer.size.height - ((params.size.height) * (mm.Brick.Size.height - 1)) + height / 2;
+  // Create a dummy sprite for physics.
+  var physicsSprite = new pulse.Sprite({
+    src: 'img/blank.png',
+    physics: {
+      isStatic: true
+    },
+    size: { 
+      width: params.size.width * mm.Brick.Size.width - params.size.width,
+      height: params.size.height * mm.Brick.Size.height - params.size.height
+    }
+  });
 
-  // Create a single body to represent the chunk
-  mm.createBody({ x: xPos, y: yPos, size: {width: width, height: height}}, layer.world);
-};
+  physicsSprite.position = {
+    x: params.x * mm.Brick.Size.width - params.x + (physicsSprite.size.width / 2) - mm.Brick.Size.width / 2,
+    y: layer.size.height - physicsSprite.size.height / 2 + mm.Brick.Size.height / 2
+  };
 
-/**
- * Helper static function for creating Box2D body
- * @config {number} width The width of the body to create
- * @config {number} height The height of the body to create
- * @config {number} x The x position of the body
- * @config {number} y the y position of the body
- * @param  {b2World} world The Box2D world to add the body to
- * @return {b2Body}
- */
-mm.createBody = function(params, world) {
-  // Box2D body definition and shape definition creation
-  var bodyDef = new b2BodyDef();
-  bodyDef.position.Set(params.x * mm.Box2DFactor, params.y * mm.Box2DFactor);
-  var body = world.CreateBody(bodyDef);
-  var shapeDef = new b2PolygonDef();
-  shapeDef.restitution = 0.0;
-  shapeDef.friction = 0.0;
-  shapeDef.density = 2.0;
-  shapeDef.SetAsBox(
-    (params.size.width * mm.Box2DFactor) / 2,
-    (params.size.height * mm.Box2DFactor) / 2);
-  body.CreateShape(shapeDef);
-
-  return body;
+  layer.addNode(physicsSprite);
 };
 
 /**
@@ -215,8 +213,8 @@ mm.Level.Layout = [
  { c: { size: {width: 4, height: 13}, x: 70}}, // J
  { c: { size: {width: 30, height: 2}, x: 96}}, // K
  { c: { size: {width: 8, height: 23}, x: 138}}, // L
-
-
+ 
+ 
  // Platforms
  { p: { size: {width: 4}, x: 6, y: 5}},    // a
  { p: { size: {width: 2}, x: 13, y: 7}},   // b

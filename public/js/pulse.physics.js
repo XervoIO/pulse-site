@@ -843,7 +843,7 @@ Box2D.postDefs = [];
       x = M.s_edgeBO[0];
       if(!(C > v)) {
         var J = 0, T = 0;
-        if(C > 0.98 * t + 0.0010) {
+        if(C > 0.98 * t + 0.001) {
           t = m;
           m = e;
           e = r;
@@ -3148,7 +3148,7 @@ Box2D.postDefs = [];
     Box2D.Common.b2Settings.b2_aabbExtension = 0.1;
     Box2D.Common.b2Settings.b2_aabbMultiplier = 2;
     Box2D.Common.b2Settings.b2_polygonRadius = 2 * G.b2_linearSlop;
-    Box2D.Common.b2Settings.b2_linearSlop = 0.0050;
+    Box2D.Common.b2Settings.b2_linearSlop = 0.005;
     Box2D.Common.b2Settings.b2_angularSlop = 2 / 180 * G.b2_pi;
     Box2D.Common.b2Settings.b2_toiSlop = 8 * G.b2_linearSlop;
     Box2D.Common.b2Settings.b2_maxTOIContactsPerIsland = 32;
@@ -9395,15 +9395,16 @@ pulse.physics.density = 1;
 pulse.physics.restitution = 0.3;
 pulse.physics.minStepTime = 16;
 pulse.physics.WORLD = new Box2D.Dynamics.b2World(pulse.physics.GRAVITY, true);
+pulse.physics.ANGLE_COEF = 180 / Math.PI;
 pulse.physics.plugin = new pulse.plugin.Plugin;
 pulse.physics.plugin.subscribe("pulse.Engine", "update", "onEnter", function(elapsed) {
   if(pulse.physics.isEnabled) {
     var steps = Math.ceil(elapsed / pulse.physics.minStepTime);
     elapsed /= steps;
-    for(var stepIdx = 0;stepIdx < steps;stepIdx++) {
-      pulse.physics.WORLD.Step(elapsed / 1E3, 8, 3)
+    for(var i = 0;i < steps;i++) {
+      pulse.physics.WORLD.Step(elapsed / 1E3, 3, 3);
+      pulse.physics.WORLD.ClearForces()
     }
-    pulse.physics.WORLD.ClearForces()
   }
 });
 pulse.physics.plugin.subscribe("pulse.Visual", "init", "onExit", function(params) {
@@ -9435,14 +9436,18 @@ pulse.physics.plugin.subscribe("pulse.Visual", "init", "onExit", function(params
   }
   if(typeof params.physics.bodyDef === "undefined") {
     this._physics.bodyDef = new Box2D.Dynamics.b2BodyDef;
+    this._physics.bodyDef.allowSleep = true;
     if(this._physics.isStatic) {
-      this._physics.bodyDef.type = Box2D.Dynamics.b2Body.b2_staticBody
+      this._physics.bodyDef.type = Box2D.Dynamics.b2Body.b2_staticBody;
+      this._physics.bodyDef.awake = false;
+      this._physics.bodyDef.fixedRotation = true
     }else {
       this._physics.bodyDef.type = Box2D.Dynamics.b2Body.b2_dynamicBody
     }
   }else {
     this._physics.bodyDef = params.physics.bodyDef
   }
+  this._physics.positionOffset = params.physics.positionOffset || {x:0, y:0}
 });
 pulse.physics.plugin.subscribe("pulse.Layer", "removeNode", "onExit", function(node) {
   if(node._physics.world && node._physics.body) {
@@ -9470,10 +9475,12 @@ pulse.physics.plugin.subscribe("pulse.Layer", "addNode", "onExit", function(node
 });
 pulse.physics.plugin.subscribe("pulse.Visual", "update", "onExit", function(elapsed) {
   if(this._physics && this._physics.isEnabled && this._physics.body) {
-    var newPosition = this._physics.body.GetPosition();
-    this.position.x = newPosition.x / pulse.physics.FACTOR;
-    this.position.y = newPosition.y / pulse.physics.FACTOR;
-    this.rotation = 180 * this._physics.body.GetAngle() / Math.PI
+    if(!this._physics.isStatic) {
+      var newPosition = this._physics.body.GetPosition();
+      this.position.x = newPosition.x / pulse.physics.FACTOR + this._physics.positionOffset.x;
+      this.position.y = newPosition.y / pulse.physics.FACTOR + this._physics.positionOffset.y
+    }
+    this.rotation = this._physics.body.GetAngle() * pulse.physics.ANGLE_COEF
   }
 });
 pulse.plugins.add(pulse.physics.plugin);

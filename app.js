@@ -78,6 +78,14 @@ app.get('/docs/using-physics-module', function(req, res) {
   });
 });
 
+app.get('/docs/using-sprite-sheet-animations', function(req, res) {
+  res.render('docs/using-sprite-sheet-animations', {
+    page : 'docs',
+    title: 'Pulse Engine: Using Sprite Sheet Animations',
+    description: 'How to define and control sprite sheet animations.'
+  });
+});
+
 app.get('/docs/api', function(req, res) {
   res.render('docs/api/index', {
     page : 'api',
@@ -198,7 +206,7 @@ app.post('/contact', function(req, res) {
     service: "Gmail",
     auth: {
       user: "admin@paranoidferret.com",
-      pass: "92323123"
+      pass: "dummy"
     }
   });
 
@@ -255,9 +263,5 @@ app.get('/license', function(req, res) {
   });
 });
 
-if(process.env.NODE_ENV && process.env.NODE_ENV === 'production') {
-  app.listen(5555);
-} else {
-  app.listen(50100);
-}
+app.listen(process.env.PORT || 8080);
 console.log('Express server started on port %s', app.address().port);

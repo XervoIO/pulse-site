@@ -1,0 +1,178 @@
+<h1>Using Sprite Sheet Animations</h1>
+<p>
+  Sprite sheet animations provides the ability to animate over a sequence of frames within a single image. This guide demonstrates how to create a simple animation from a sprite sheet image.
+</p>
+<h2>The Image</h2>
+<p>
+  Frames within a sprite sheet animation should be laid out linearly and all be the same size. In this example, they are 100x100 pixels.
+</p>
+<img src="/img/sprite_sheet.png" />
+
+<h2>The Sprite</h2>
+<p>
+  Sprite sheet animations are <a href="http://withpulse.com/docs/api/symbols/pulse.AnimateAction">AnimateActions</a> that are applied to a sprite. There are several ways to define sprites but for most complicated games, subclassing is the best approach.
+</p>
+<pre>
+<code data-language="javascript">
+  var CustomSprite = pulse.Sprite.extend({
+    init: function(params) {
+
+      // Override the params with a texture source.
+      params = params || {};
+      params.src = 'linear.png';
+
+      this._super(params);
+
+      // Set the size of the sprite to the size of a single frame.
+      this.size = { width: 100, height: 100 };
+    }
+  });
+</code>
+</pre>
+
+<p>
+  This sprite can be created and added to a layer like any other.
+</p>
+
+<pre>
+<code data-language="javascript">
+  var sprite = new CustomSprite();
+  sprite.position = { x: 200, y: 200 };
+  myLayer.addNode(sprite);
+</code>
+</pre>
+
+<p>
+  The source image of the sprite must be set to the sprite sheet that contains the animation frames. By default sprites derive their size from the source image. For sprite sheets this is not the desired behavior. Therefore, the size of the sprite should be set to the size of a single frame.
+</p>
+
+<h2>The Animation</h2>
+<p>
+   Defining a sprite sheet animation is fairly quick and easy.
+</p>
+<pre>
+<code data-language="javascript">
+  // Setup the animation.
+  var action = new pulse.AnimateAction({
+    name: 'loop',
+    size : { width:100, height:100 },
+    bounds : { width: 600, height: 100},
+    frames : [0, 1, 2, 3, 4, 5],
+    frameRate : 1 /* FPS */
+  });
+</code>
+</pre>
+
+<p>
+<b>name</b><br />
+The unique name of the animation. This is used to control the animation after it’s created.
+</p>
+
+<p>
+<b>size</b><br />
+The size of a single frame within the sprite sheet image.
+</p>
+
+<p>
+<b>bounds</b><br />
+The total size of the sprite sheet image.
+</p>
+
+<p>
+<b>frames</b><br />
+The order in which to play the frames. In the above example, every frame is played in sequence. The order can be anything and frames can be repeated if needed. [4, 4, 4, 2] plays frame 4 three times and frame 2 once. Not all frames are required to be displayed. Indexes are zero-based.
+</p>
+
+<p>
+<b>frameRate</b><br />
+How fast the animation should play in frames per second.
+</p>
+
+<p>
+<b>plays</b> (optional)<br />
+The number of times the animation should repeat. A number less than zero indicates forever.
+</p>
+
+<pre>
+<code data-language="javascript">
+  var CustomSprite = pulse.Sprite.extend({
+
+  init: function(params) {
+
+    // Override the params with a texture source.
+    params = params || {};
+    params.src = 'linear.png';
+
+    this._super(params);
+
+    this.size = { width: 100, height: 100 };
+
+    // Setup the animation.
+    var action = new pulse.AnimateAction({
+      name: 'loop',
+      size : { width:100, height:100 },
+      bounds : { width: 600, height: 100},
+      frames : [0, 1, 2, 3, 4, 5],
+      frameRate : 1 /* FPS */
+    });
+
+    // Add and run the animation.
+    this.addAction(action);
+    this.runAction('loop');
+  }
+});
+</code>
+</pre>
+
+<h2>Animation Control</h2>
+<p>
+After the action has been added to the sprite it can be started and stopped on demand.
+</p>
+
+<pre>
+<code data-language="javascript">
+  // Add the action to the sprite
+  this.addAction(action);
+
+  // Starts the action with the name ‘loop’.
+  // This will run the action forever until stop is called.
+  this.runAction(‘loop’);
+
+  // Stop the action.
+  action.stop();
+</code>
+</pre>
+
+<h2>Animation Target</h2>
+<p>
+  Every action has a target property that keeps track of the visual that’s being affected. When <a href="http://withpulse.com/docs/api/symbols/pulse.Visual#runAction">runAction</a> is called, Pulse assigns the target property to the object it was added to (when <a href="http://withpulse.com/docs/api/symbols/pulse.Visual#addAction">addAction</a>) was called. The target property can be directly assigned to provide another level of flexibility.
+</p>
+
+<pre>
+<code data-language="javascript">
+  // Set the target instead of called addAction and runAction
+  action.target = this;
+
+  // Start the animation.
+  action.start();
+
+  // Stop the animation.
+  action.stop();
+</code>
+</pre>
+
+<h2>Get Running Actions</h2>
+<p>
+  Actions that are running can be obtained at any time by requesting the <a href="http://withpulse.com/docs/api/symbols/pulse.Visual#runningActions">runningActions</a> property. This returns an array of action objects.
+</p>
+
+<pre>
+<code data-language="javascript">
+  // Stop all actions.
+  var actions = sprite.runningActions;
+  for(var i = 0; i &lt; actions.length; i++) {
+   actions[i].stop();
+  }
+</code>
+</pre>
+<script src="/js/rainbow-custom.min.js"></script>

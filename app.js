@@ -1,10 +1,16 @@
+require('nodefly').profile(
+  '1234567890',
+  'Pulse Site'
+);
+
 var express = require('express'),
     app = express.createServer(),
     email = require("nodemailer"),
     gaab = require('./gaab');
 
 app.configure(function(){
-  app.use(express.static(__dirname + '/public'));
+  app.enable('view cache');
+  app.use(express.static(__dirname + '/public', { maxAge: 86400000 /* one day */ }));
   app.use(express.bodyParser());
   app.set('view engine', 'ejs');
 });
@@ -205,8 +211,8 @@ app.post('/contact', function(req, res) {
   var smtpTransport = email.createTransport("SMTP", {
     service: "Gmail",
     auth: {
-      user: "admin@paranoidferret.com",
-      pass: "dummy"
+      user: "admin@example.com",
+      pass: "1234567890"
     }
   });
 
@@ -263,5 +269,10 @@ app.get('/license', function(req, res) {
   });
 });
 
+<<<<<<< HEAD
 app.listen(process.env.PORT || 8080);
+=======
+app.listen(8080);
+
+>>>>>>> b1d4a76d4bb871decd5808a1d03f3907c79cfec3
 console.log('Express server started on port %s', app.address().port);

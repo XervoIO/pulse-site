@@ -269,10 +269,6 @@ app.get('/license', function(req, res) {
   });
 });
 
-<<<<<<< HEAD
 app.listen(process.env.PORT || 8080);
-=======
-app.listen(8080);
 
->>>>>>> b1d4a76d4bb871decd5808a1d03f3907c79cfec3
 console.log('Express server started on port %s', app.address().port);
